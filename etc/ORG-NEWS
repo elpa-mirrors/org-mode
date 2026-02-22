@@ -30,6 +30,11 @@ Please send Org bug reports to mailto:emacs-orgmode@gnu.org.
 # We list the most important features, and the features that may
 # require user action to be used.
 
+*** New variable ~org-latex-default-example-environment~
+
+Use this variable to control the LaTeX environment used in example
+blocks.
+
 ** New and changed options
 
 # Changes dealing with changing default values of customizations,

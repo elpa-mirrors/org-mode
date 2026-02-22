@@ -14815,6 +14815,18 @@ exports to:
 \end{Verbatim}
 #+end_example
 
+#+vindex: org-latex-default-example-environment
+If you plan to use, for example the =Verbatim= environment for all
+example blocks in a document, you can change variable
+~org-latex-default-example-environment~ to the desired environment. In
+the example above, you could
+
+#+BEGIN_SRC emacs-lisp
+(setq org-latex-default-example-environment "Verbatim")
+#+END_SRC
+
+to avoid having to set the environment for every example.
+
 *** Special blocks in LaTeX export
 :PROPERTIES:
 :DESCRIPTION: Attributes specific to special blocks.

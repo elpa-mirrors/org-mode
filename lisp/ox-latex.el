@@ -1410,6 +1410,11 @@ default values of which are given by `org-latex-engraved-preamble' and
        (warn "Cannot engrave source blocks.  Consider installing `engrave-faces'.")
        "% WARNING syntax highlighting unavailable as engrave-faces-latex was missing.\n")
      "\n")))
+;;
+(defcustom org-latex-default-example-environment "verbatim"
+  "The default environment to use for example blocks."
+  :type 'string
+  :safe #'stringp)
 
 ;;;; Compilation
 
@@ -2917,7 +2922,7 @@ information."
   (when (org-string-nw-p (org-element-property :value example-block))
     (let ((environment (or (org-export-read-attribute
 			    :attr_latex example-block :environment)
-			   "verbatim"))
+			   org-latex-default-example-environment))
           (options (or (org-export-read-attribute
                         :attr_latex example-block :options)
                        "")))
