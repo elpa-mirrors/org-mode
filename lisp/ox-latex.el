@@ -5301,7 +5301,7 @@ encountered or nil if there was none."
       (goto-char (point-max))
       (when (re-search-backward "^[ \t]*This is .*?TeX.*?Version" nil t)
 	(if (and
-	     (re-search-forward "^!\\(.+\\)" nil t)
+	     (save-excursion (re-search-forward "^!\\(.+\\)" nil t))
              ;; This error is passed as missing character warning
              (not (string-match-p "Unicode character" (match-string 1))))
             'error
