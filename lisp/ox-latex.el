@@ -5353,7 +5353,7 @@ This list can be then used to provide/improve the font configurations."
                            (setq current-font font)
                            ;; New line for each new FONT
                            (setq result (concat result "\nFor font " font ": " script)))))
-              (warn "Missing scripts:%s" result))))))))
+              (warn "Missing scripts:%s\nSee Org manual info node `(org)Font configuration for LuaLaTeX and XeLaTeX'" result))))))))
 
 ;;;###autoload
 (defun org-latex-publish-to-latex (plist filename pub-dir)
