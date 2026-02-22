@@ -3158,7 +3158,7 @@ links to other files, Usenet articles, emails, and much more.
 #+cindex: angle bracket links
 #+cindex: plain links
 Org recognizes plain URIs, possibly wrapped within angle
-brackets[fn:9], and activate them as clickable links.
+brackets[fn:10], and activates them as clickable links.
 
 #+cindex: bracket links
 The general link format, however, looks like this:
@@ -3275,7 +3275,7 @@ The last sentence will appear as =Here we refer to item 2= when
 exported.
 
 In non-Org files, the search looks for the words in the link text.  In
-the above example the search would be for =target=.
+the above example, the search would be for =target=.
 
 Following a link pushes a mark onto Org's own mark ring.  You can
 return to the previous position with {{{kbd(C-c &)}}}.  Using this
@@ -3332,8 +3332,8 @@ Here is the full set of built-in link types:
 
   File links.  File name may be remote, absolute, or relative.
 
-  As a special case, "file" prefix may be omitted if the file name
-  is complete, e.g., it starts with =./=, or =/=.
+  As a special case, the "file" prefix may be omitted if the file name
+  is complete, e.g., it starts with =./= or =/=.
 
 - =attachment= ::
 
@@ -3664,14 +3664,14 @@ generally, act on links.
   #+findex: org-open-at-point
   #+vindex: org-file-apps
   Open link at point.  This launches a web browser for URL (using
-  ~browse-url-at-point~), run VM/MH-E/Wanderlust/Rmail/Gnus/BBDB for
-  the corresponding links, and execute the command in a shell link.
+  ~browse-url-at-point~), runs VM/MH-E/Wanderlust/Rmail/Gnus/BBDB for
+  the corresponding links, and executes the command in a shell link.
   When point is on an internal link, this command runs the
   corresponding search.  When point is on the tags part of a headline,
   it creates the corresponding tags view (see [[*Matching tags and
   properties]]).  If point is on a timestamp, it compiles the agenda for
   that date.  Furthermore, it visits text and remote files in =file=
-  links with Emacs and select a suitable application for local
+  links with Emacs and selects a suitable application for local
   non-text files.  Classification of files is based on file extension
   only.  See option ~org-file-apps~.  If you want to override the
   default application and visit the file with Emacs, use
@@ -3694,7 +3694,7 @@ generally, act on links.
 
   #+kindex: mouse-2
   #+kindex: mouse-1
-  On links, {{{kbd(mouse-1)}}} and {{{kbd(mouse-2)}}} opens the link
+  On links, {{{kbd(mouse-1)}}} and {{{kbd(mouse-2)}}} open the link
   just as {{{kbd(C-c C-o)}}} does.
 
 - {{{kbd(mouse-3)}}} ::
@@ -3763,7 +3763,7 @@ You might want to bind them to globally available keys.  See
 #+cindex: link abbreviations
 #+cindex: abbreviation, links
 
-Long URL can be cumbersome to type, and often many similar links are
+Long URLs can be cumbersome to type, and often many similar links are
 needed in a document.  For this you can use link abbreviations.  An
 abbreviated link looks like this
 
@@ -3789,7 +3789,7 @@ replacement text.  Here is an example:
 If the replacement text contains the string =%s=, it is replaced with
 the tag.  Using =%h= instead of =%s= percent-encodes the tag (see the
 example above, where we need to encode the URL parameter).  Using
-=%(my-function)= passes the tag to a custom Lisp function, and replace
+=%(my-function)= passes the tag to a custom Lisp function, and replaces
 it by the resulting string.
 
 If the replacement text does not contain any specifier, it is simply
@@ -3981,7 +3981,7 @@ The most important commands to work with TODO entries are:
   Select the following/preceding TODO state, similar to cycling.
   Useful mostly if more than two TODO states are possible (see
   [[*Extended Use of TODO Keywords]]).  See also [[*Packages that conflict
-  with Org mode]], for a discussion of the interaction with
+  with Org mode]] for a discussion of the interaction with
   shift-selection.  See also the variable
   ~org-treat-S-cursor-todo-selection-as-state-change~.
 
@@ -4009,7 +4009,7 @@ The most important commands to work with TODO entries are:
   buffer.  The new buffer is in Org Agenda mode, which provides
   commands to examine and manipulate the TODO entries from the new
   buffer (see [[*Commands in the Agenda Buffer]]).  See [[*The global TODO
-  list]], for more information.
+  list]] for more information.
 
 - {{{kbd(S-M-RET)}}} (~org-insert-todo-heading~) ::
 
@@ -4071,8 +4071,8 @@ and {{{kbd(S-LEFT)}}} to go forward and backward through the states.
 If you define many keywords, you can use in-buffer completion (see
 [[*Completion]]) or a special one-key selection scheme (see [[*Fast
 access to TODO states]]) to insert these words into the buffer.
-Changing a TODO state can be logged with a timestamp, see [[*Tracking
-TODO state changes]], for more information.
+Changing a TODO state can be logged with a timestamp; see [[*Tracking
+TODO state changes]] for more information.
 
 *** TODO keywords as types
 :PROPERTIES:
@@ -4153,7 +4153,7 @@ correct sequence.  In addition to typing a keyword or using completion
   above example, {{{kbd(C-u C-u C-c C-t)}}} or {{{kbd(C-S-RIGHT)}}}
   would jump from =TODO= or =DONE= to =REPORT=, and any of the words
   in the second row to =CANCELED=.  Note that the {{{kbd(C-S-)}}} key
-  binding conflict with shift-selection (see [[*Packages that conflict
+  binding conflicts with shift-selection (see [[*Packages that conflict
   with Org mode]]).
 
 - {{{kbd(S-RIGHT)}}}, {{{kbd(S-LEFT)}}} ::
@@ -4653,7 +4653,7 @@ TODO items.
   Increase/decrease the priority of the current headline[fn:: See also
   the option ~org-priority-start-cycle-with-default~.].  Note that
   these keys are also used to modify timestamps (see [[*Creating
-  Timestamps]]).  See also [[*Packages that conflict with Org mode]],
+  Timestamps]]).  See also [[*Packages that conflict with Org mode]]
   for a discussion of the interaction with shift-selection.
 
 #+vindex: org-priority-highest
@@ -4746,7 +4746,7 @@ of) subtasks (see [[*Checkboxes]]).
 Every item in a plain list[fn:15] (see [[*Plain Lists]]) can be made into
 a checkbox by starting it with the string =[ ]=.  This feature is
 similar to TODO items (see [[*TODO Items]]), but is more lightweight.
-Checkboxes are not included into the global TODO list, so they are
+Checkboxes are not included in the global TODO list, so they are
 often great to split a task into a number of simple steps.  Or you can
 use them in a shopping list.
 
@@ -4768,9 +4768,9 @@ Here is an example of a checkbox list.
 #+cindex: @samp{COOKIE_DATA}, property
 #+vindex: org-checkbox-hierarchical-statistics
 The =[2/4]= and =[1/3]= in the first and second line are cookies
-indicating how many checkboxes present in this entry have been checked
+indicating how many of the checkboxes present in this entry have been checked
 off, and the total number of checkboxes present.  This can give you an
-idea on how many checkboxes remain, even without opening a folded
+idea of how many checkboxes remain, even without opening a folded
 entry.  The cookies can be placed into a headline or into (the first
 line of) a plain list item.  Each cookie covers checkboxes of direct
 children structurally below the headline/item on which the cookie
