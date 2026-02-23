@@ -802,6 +802,23 @@ default we use here encompasses both."
   :type '(alist :key-type (string :tag "Type")
 		:value-type (regexp :tag "Path")))
 
+(defcustom org-latex-graphics-path nil
+  "The graphics path as expected by \\graphicspath{}.
+
+If non-nil, a string with the different paths where LaTeX can
+find images to import into the text. It follows the convention
+of the \\graphicspath} command.
+
+For example, if you expect images to be in the same directory
+as the Org file and in a subdirectory called images, you can
+set it to:
+\"{./}{./images}\". "
+  :group 'org-export-latex
+  :type '(choice (const :tag "No template" nil)
+		 (string :tag "Directory spec."))
+  :safe #'string-or-null-p)
+
+
 (defcustom org-latex-link-with-unknown-path-format "\\texttt{%s}"
   "Format string for links with unknown path type."
   :group 'org-export-latex
@@ -2736,7 +2753,10 @@ specified in `org-latex-default-packages-alist' or
              (org-latex--remove-packages org-latex-packages-alist info)
              snippet?
              (mapconcat #'org-element-normalize-string
-                        (list (plist-get info :latex-header)
+                        (list (and (not snippet?)
+                                   org-latex-graphics-path
+                                   (format "\\graphicspath{%s}" org-latex-graphics-path))
+                              (plist-get info :latex-header)
                               (and (not snippet?)
                                    (plist-get info :latex-header-extra))
                               (and (not snippet?)

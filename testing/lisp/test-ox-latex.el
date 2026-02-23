@@ -655,6 +655,20 @@ How do you do?
       (should (search-forward "\\begin{document}" nil t))
       (should (search-forward "\\begin{Verbatim}[frame=single]" nil t))))
 
+(ert-deftest test-ox-latex/latex-graphics-path ()
+  "Test that the graphics path is inserted correctly "
+  (let ((org-latex-graphics-path "{./}{./images}"))
+  (org-test-with-exported-text 'latex
+                               "#+TITLE: Test adding a graphics path
+
+* Test
+
+Dumm test
+"
+      (goto-char (point-min))
+      (should (search-forward "\\graphicspath{{./}{./images}}" nil t))
+      (should (search-forward "\\begin{document}" nil t)))))
+
 
 (ert-deftest test-ox-latex/math-in-alt-title ()
   "Test math wrapping in ALT_TITLE properties."

@@ -14673,6 +14673,27 @@ set ~org-latex-images-centered~ to =nil=.
 Set the =:comment-include= attribute to non-~nil~ value for the LaTeX
 export backend to comment out the =\includegraphics= macro.
 
+#+vindex: org-latex-graphics-path
+Finally, you can configure the /graphics path/ where your images are
+located. This is convenient if you add native LaTeX code that includes
+images. Set the custom variable ~org-latex-graphics-path~ to the list
+of directories where your images are located, using the syntax of the
+[[https://latexref.xyz/_005cgraphicspath.html][LaTeX ~\graphicspath{}~
+command]]. For example:
+
+#+BEGIN_SRC emacs-lisp
+(setq org-latex-graphics-path "{./}{./images}")
+#+END_SRC
+
+will include the following LaTeX code in the LaTeX preamble
+
+#+BEGIN_SRC latex
+\graphicspath{{./}{./images}}
+#+END_SRC
+
+that will allow you to include images from the Org file's directory
+and the ~images~ directory under it.
+
 *** Plain lists in LaTeX export
 :PROPERTIES:
 :DESCRIPTION: Attributes specific to lists.
