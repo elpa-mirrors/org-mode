@@ -150,6 +150,7 @@
     (:latex-image-default-height nil nil org-latex-image-default-height)
     (:latex-image-default-option nil nil org-latex-image-default-option)
     (:latex-image-default-width nil nil org-latex-image-default-width)
+    (:latex-graphics-path "LATEX_GRAPHICS_PATH" nil org-latex-graphics-path)
     (:latex-images-centered nil nil org-latex-images-centered)
     (:latex-inactive-timestamp-format nil nil org-latex-inactive-timestamp-format)
     (:latex-inline-image-rules nil nil org-latex-inline-image-rules)
@@ -2744,7 +2745,8 @@ specified in `org-latex-default-packages-alist' or
 			            class-options header t nil 1)))
                                 nil)))
 	      (user-error "Unknown LaTeX class `%s'" class)))
-         (multi-lang (plist-get info :latex-multi-lang)))
+         (multi-lang (plist-get info :latex-multi-lang))
+         (latex-graphics-path (plist-get info :latex-graphics-path)))
     (let ((new-template
            (org-element-normalize-string
             (org-splice-latex-header
@@ -2754,8 +2756,8 @@ specified in `org-latex-default-packages-alist' or
              snippet?
              (mapconcat #'org-element-normalize-string
                         (list (and (not snippet?)
-                                   org-latex-graphics-path
-                                   (format "\\graphicspath{%s}" org-latex-graphics-path))
+                                   latex-graphics-path
+                                   (format "\\graphicspath{%s}" latex-graphics-path))
                               (plist-get info :latex-header)
                               (and (not snippet?)
                                    (plist-get info :latex-header-extra))

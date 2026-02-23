@@ -14251,6 +14251,12 @@ general options (see [[*Export Settings]]).
   =hyperref= settings.  See ~org-latex-classes~ for adjusting the
   structure and order of the LaTeX headers.
 
+- =LATEX_GRAPHICS_PATH= ::
+
+  #+cindex: @samp{LATEX_GRAPHICS_PATH}
+  The directories where LaTeX will find images, when they are
+  referenced without path.  See ~org-latex-graphics-path~ for details.
+
 - =LANGUAGE= ::
   #+cindex: @samp{LANGUAGE}, keyword
   #+vindex: org-latex-packages-alist
@@ -14344,6 +14350,7 @@ custom sectioning or custom classes.
 
 #+cindex: @samp{LATEX_CLASS}, keyword
 #+cindex: @samp{LATEX_CLASS_OPTIONS}, keyword
+#+cindex: @samp{LATEX_CLASS_PRE}, keyword
 #+cindex: @samp{EXPORT_LATEX_CLASS}, property
 #+cindex: @samp{EXPORT_LATEX_CLASS_OPTIONS}, property
 The LaTeX export backend sends the =LATEX_CLASS_OPTIONS= keyword and
@@ -14692,7 +14699,14 @@ will include the following LaTeX code in the LaTeX preamble
 #+END_SRC
 
 that will allow you to include images from the Org file's directory
-and the ~images~ directory under it.
+and the ~images~ directory under it. You can also set this variable
+with keyword =LATEX_GRAPHICS_PATH=:
+
+#+BEGIN_SRC  org
+,#+LATEX_GRAPHICS_PATH: {./}{./images}
+#+END_SRC
+
+will produce the same LaTeX code in the preamble.
 
 *** Plain lists in LaTeX export
 :PROPERTIES:

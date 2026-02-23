@@ -663,11 +663,25 @@ How do you do?
 
 * Test
 
-Dumm test
+Dummy graphics path test
 "
       (goto-char (point-min))
       (should (search-forward "\\graphicspath{{./}{./images}}" nil t))
       (should (search-forward "\\begin{document}" nil t)))))
+
+(ert-deftest test-ox-latex/latex-graphics-path2 ()
+  "Test that the graphics path is inserted correctly "
+  (org-test-with-exported-text 'latex
+                               "#+TITLE: Test adding a graphics path
+#+LATEX_GRAPHICS_PATH: {./}{./logos}
+
+* Test
+
+Dummy graphics path test 2
+"
+      (goto-char (point-min))
+      (should (search-forward "\\graphicspath{{./}{./logos}}" nil t))
+      (should (search-forward "\\begin{document}" nil t))))
 
 
 (ert-deftest test-ox-latex/math-in-alt-title ()
