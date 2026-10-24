@@ -873,6 +873,9 @@ Value can be a symbol among:
   `inline-math' This mode is almost the same as `math', but the
      math environment will be inlined.
 
+   `math-star' This mode is almost the same as `math', but the
+     math environment neither be wrapped or inlined.
+
   `verbatim' The table is exported as it appears in the Org
      buffer, within a verbatim environment.
 
@@ -887,8 +890,9 @@ When modifying this variable, it may be useful to change
   :type '(choice (const :tag "Table" table)
 		 (const :tag "Matrix" math)
 		 (const :tag "Inline matrix" inline-math)
+		 (const :tag "Bare matrix" math-star)
 		 (const :tag "Verbatim" verbatim))
-  :safe #'(lambda (s) (memq s '(table math inline-math verbatim))))
+  :safe #'(lambda (s) (memq s '(table math inline-math math-star verbatim))))
 
 (defcustom org-latex-tables-centered t
   "When non-nil, tables are exported in a center environment."
@@ -4109,8 +4113,8 @@ holding contextual information."
 ;;;; Pseudo Element: LaTeX Matrices
 
 ;; `latex-matrices' elements have the following properties:
-;; `:caption', `:post-blank' and `:markup' (`inline', `equation' or
-;; `math').
+;; `:caption', `:post-blank' and `:markup' (`inline', `equation',
+;; `math' or `math-star').
 
 (defun org-latex--wrap-latex-matrices (data info)
   "Merge contiguous tables with the same mode within a pseudo-element.
@@ -4122,7 +4126,7 @@ it."
         (when (eq (org-element-property :type table) 'org)
 	  (let ((mode (or (org-export-read-attribute :attr_latex table :mode)
 			  (plist-get info :latex-default-table-mode))))
-	    (when (and (member mode '("inline-math" "math"))
+	    (when (and (member mode '("inline-math" "math" "math*"))
 		       ;; Do not wrap twice the same table.
 		       (not (org-element-type-p
 			     (org-element-parent table) 'latex-matrices)))
@@ -4140,6 +4144,7 @@ it."
 				  :markup
 				  (cond ((string= mode "inline-math") 'inline)
 				        ((or caption name) 'equation)
+                                        ((string= mode "math*") 'math-star)
 				        (t 'math)))))
 		     (previous table)
 		     (next (org-export-get-next-element table info)))
@@ -4172,21 +4177,13 @@ it."
     info)
   data)
 
-(defun org-latex--maybe-escape-matrix (fmt contents)
-  "Escape CONTENTS using FMT, expect for the align and align* environments.
-Remove the space between the equal sign and the column mark (&) at the
-end of a cell for these environments."
-  (if (string-match-p "\\\\begin{align\\*?}" contents)
-      (string-replace
-       "= &" "=&" contents)
-    (format fmt contents)))
-
 (defun org-latex-matrices (matrices contents info)
   "Transcode a MATRICES element from Org to LaTeX.
 CONTENTS is a string.  INFO is a plist used as a communication
 channel."
   (pcase (org-element-property :markup matrices)
-    (`inline (org-latex--maybe-escape-matrix "\\(%s\\)" contents))
+    (`inline (format "\\(%s\\)" contents))
+    (`math-star contents)
     (`equation
      (let ((caption (org-latex--caption/label-string matrices info))
 	   (caption-above? (org-latex--caption-above-p matrices info)))
@@ -4196,7 +4193,7 @@ channel."
 	       (and (not caption-above?) caption)
 	       "\\end{equation}")))
     (_
-     (org-latex--maybe-escape-matrix "\\[\n%s\\]" contents))))
+     (format "\\[\n%s\\]" contents))))
 
 
 ;;;; Pseudo Object: LaTeX Math Block
@@ -4734,7 +4731,7 @@ contextual information."
 		(org-trim (org-element-interpret-data
 			   `(table nil ,@(org-element-contents table))))))
        ;; Case 2: Matrix.
-       ((or (string= type "math") (string= type "inline-math"))
+       ((member type '("math" "math*" "inline-math"))
         (org-latex--math-table table info))
        ;; Case 3: Tabbing
        ((string= type "tabbing")

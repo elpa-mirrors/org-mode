@@ -556,6 +556,17 @@ This new keyword allows you to set the variable
 ~org-latex-table-scientific-notation~ in the document header and
 control how numbers in scientific notation are shown in the document.
 
+*** New =math*= table mode.
+
+Use this mode to typeset multi-line equations using the =align= or
+=align*= environments provided by the =amsmath= package. For example:
+
+#+begin_src org
+,#+attr-latex: :mode math* :environment align
+| D_a(d) = | min(c_{a,b}+D_b(d), c_{a,c}+D_c(d), c_{a,d}+D_d(d))
+| D_b(d) = | min(c_{b,a}+D_a(d), c_{b,c}+D_c(d), c_{b,d}+D_d(d))
+#+end_src
+
 ** New functions and changes in function arguments
 
 # This also includes changes in function behavior from Elisp perspective.
